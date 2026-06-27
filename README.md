@@ -1,48 +1,46 @@
-# 🛎️ Bellify — Sistema de Agendamento e Gestão para Salões de Beleza
+# Bellify — Sistema de Agendamento e Gestao para Saloes de Beleza
 
-**Bellify** é uma plataforma web para o gerenciamento completo de salões de beleza, desenvolvida como trabalho final da disciplina **Processo de Desenvolvimento de Software** do curso de **Bacharelado em Sistemas de Informação**.
+**Bellify** e uma plataforma web para o gerenciamento completo de saloes de beleza, desenvolvida como trabalho final da disciplina **Processo de Desenvolvimento de Software** do curso de **Bacharelado em Sistemas de Informacao**.
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
-O sistema tem como objetivo facilitar o gerenciamento de salões de beleza por meio do controle de clientes, profissionais, serviços e agendamentos. A plataforma permite que:
+O sistema tem como objetivo facilitar o gerenciamento de saloes de beleza por meio do controle de clientes, profissionais, servicos e agendamentos. A plataforma permite que:
 
 - **Clientes** realizem e acompanhem seus agendamentos;
-- **Profissionais** organizem suas agendas e bloqueiem horários indisponíveis;
-- **Gerentes** tenham acesso a relatórios e indicadores do negócio.
+- **Profissionais** organizem suas agendas e bloqueiem horarios indisponiveis;
+- **Gerentes** tenham acesso a relatorios e indicadores do negocio.
 
-O software conta com **frontend** (interface gráfica) e **backend orientado a objetos**, seguindo os requisitos da disciplina e utilizando a metodologia ágil **Scrum** com 4 sprints.
-
----
-
-## 👥 Equipe
-
-| Nome | Matrícula |
-|------|-----------|
-| Ana Júlia Lisboa de Sousa | 12411BSI200 |
-| Cauan Filipe Moraes Monteiro | 12421BSI223 |
-| Davi Silva Pinheiro | 12421BSI332 |
-| Iris Ribeiro da Silva Zabisky | 12421BSI204 |
-| Lucas Santos Mendes | 12321BSI306 |
-| Shayene Lopes Figueredo | 12411BSI224 |
-
-**Orientadora:** Profa. Fabíola S. F. Pereira
+O software conta com **frontend** (interface grafica) e **backend orientado a objetos**, seguindo os requisitos da disciplina e utilizando a metodologia agil **Scrum** com 4 sprints.
 
 ---
 
-## 🚀 Funcionalidades
+## Equipe
 
-- ✅ Cadastro e gerenciamento de usuários (clientes, profissionais e gerentes)
-- ✅ Cadastro e gerenciamento de serviços oferecidos pelo salão
-- ✅ Agendamento de horários para clientes com profissionais
-- ✅ Controle de agenda dos profissionais com bloqueio de horários
-- ✅ Cancelamento de agendamentos conforme regras definidas pelo salão
-- ✅ Emissão de relatórios gerenciais
+- Ana Julia Lisboa de Sousa
+- Cauan Filipe Moraes Monteiro
+- Davi Silva Pinheiro
+- Iris Ribeiro da Silva Zabisky
+- Lucas Santos Mendes
+- Shayene Lopes Figueredo
+
+**Orientadora:** Profa. Fabiola S. F. Pereira
 
 ---
 
-## 🛠️ Tecnologias
+## Funcionalidades
+
+- Cadastro e gerenciamento de usuarios (clientes, profissionais e gerentes)
+- Cadastro e gerenciamento de servicos oferecidos pelo salao
+- Agendamento de horarios para clientes com profissionais
+- Controle de agenda dos profissionais com bloqueio de horarios
+- Cancelamento de agendamentos conforme regras definidas pelo salao
+- Emissao de relatorios gerenciais
+
+---
+
+## Tecnologias
 
 > *A serem definidas pelo grupo durante o Sprint 1.*
 
@@ -54,43 +52,34 @@ O software conta com **frontend** (interface gráfica) e **backend orientado a o
 
 ---
 
-## 📐 Metodologia — Scrum
+## Metodologia — Scrum
 
-O projeto segue a metodologia ágil **Scrum** adaptada ao calendário da disciplina:
+O projeto segue a metodologia agil **Scrum** adaptada ao calendario da disciplina:
 
-| Sprint | Período | Entregável |
+| Sprint | Periodo | Entregavel |
 |--------|---------|------------|
-| Sprint 1 | 22/06 — 29/06 | Backlog no Jira, Scrum Board, repositório GitHub |
-| Sprint 2 | 01/07 — 08/07 | Funcionalidades implementadas + Review em vídeo |
-| Sprint 3 | 11/07 — 18/07 | Funcionalidades implementadas + Review em vídeo |
-| Sprint 4 | 20/07 — 23/07 | Versão final + Relatório na Wiki + Seminário |
+| Sprint 1 | 22/06 — 29/06 | Backlog no Jira, Scrum Board, repositorio GitHub |
+| Sprint 2 | 01/07 — 08/07 | Funcionalidades implementadas + Review em video |
+| Sprint 3 | 11/07 — 18/07 | Funcionalidades implementadas + Review em video |
+| Sprint 4 | 20/07 — 23/07 | Versao final + Relatorio na Wiki + Seminario |
 
 ---
 
-## 📂 Estrutura do Repositório
+## Estrutura do Repositorio
 
 ```
 bellify-gerenciamento-salao/
-├── frontend/           # Interface gráfica do sistema
-├── backend/            # API e lógica de negócio (orientada a objetos)
-├── docs/               # Documentação complementar
-├── trabalho-final/     # Documentos de referência do trabalho
+├── frontend/           # Interface grafica do sistema
+├── backend/            # API e logica de negocio (orientada a objetos)
+├── docs/               # Documentacao complementar
 └── README.md
 ```
 
 ---
 
-## 🔗 Links
+## Licenca
 
-- **Jira:** *a ser adicionado*
-- **Wiki (Documentação):** *a ser adicionada*
-- **Repositório:** [github.com/ShayeneFigueredo/bellify-gerenciamento-salao](https://github.com/ShayeneFigueredo/bellify-gerenciamento-salao)
-
----
-
-## 📄 Licença
-
-Este projeto é desenvolvido para fins acadêmicos.
+Este projeto e desenvolvido para fins academicos.
 
 ---
 
