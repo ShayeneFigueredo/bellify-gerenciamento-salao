@@ -81,7 +81,7 @@ function Sidebar({ active }) {
           Serviços
         </Link>
 
-        <Link to="/admin" className={`sidebar-item ${active === 'profissionais' ? 'sidebar-item--ativo' : ''}`}>
+        <Link to="/admin/profissionais" className={`sidebar-item ${active === 'profissionais' ? 'sidebar-item--ativo' : ''}`}>
           <IconProfissionais />
           Profissionais
         </Link>
@@ -133,7 +133,7 @@ export default function Dashboard() {
               </div>
             </Link>
 
-            <div className="dash-card">
+            <Link to="/admin/profissionais" className="dash-card">
               <div className="dash-card-icon dash-card-icon--roxo">
                 <IconProfissionais />
               </div>
@@ -141,7 +141,7 @@ export default function Dashboard() {
                 <span className="dash-card-numero">0</span>
                 <span className="dash-card-label">Profissionais</span>
               </div>
-            </div>
+            </Link>
 
             <div className="dash-card">
               <div className="dash-card-icon dash-card-icon--roxo">
@@ -162,10 +162,10 @@ export default function Dashboard() {
                 <span>Cadastrar serviço</span>
               </Link>
 
-              <button className="acao-card" disabled>
+              <Link to="/admin/profissionais/novo" className="acao-card">
                 <IconUserPlus />
                 <span>Cadastrar profissional</span>
-              </button>
+              </Link>
 
               <button className="acao-card" disabled>
                 <IconList />

@@ -5,6 +5,8 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Servicos from './pages/Servicos'
 import ServicosNovo from './pages/ServicosNovo'
+import Profissionais from './pages/Profissionais'
+import ProfissionaisNovo from './pages/ProfissionaisNovo'
 import './App.css'
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
       <Route path="/admin" element={<Dashboard />} />
       <Route path="/admin/servicos" element={<Servicos />} />
       <Route path="/admin/servicos/novo" element={<ServicosNovo />} />
+      <Route path="/admin/profissionais" element={<Profissionais />} />
+      <Route path="/admin/profissionais/novo" element={<ProfissionaisNovo />} />
     </Routes>
   )
 }
