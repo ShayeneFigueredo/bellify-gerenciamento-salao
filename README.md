@@ -42,13 +42,20 @@ O software conta com **frontend** (interface grafica) e **backend orientado a ob
 
 ## Tecnologias
 
-> *A serem definidas pelo grupo durante o Sprint 1.*
-
 | Camada | Tecnologias |
 |--------|-------------|
-| Frontend | *a definir* |
+| Frontend | React 19, Vite, React Router DOM 7, Axios, CSS Modules |
 | Backend | *a definir* |
 | Banco de Dados | *a definir* |
+
+### Frontend
+
+- **React 19** — biblioteca para construção da interface
+- **Vite 8** — bundler e dev server com HMR
+- **React Router DOM 7** — roteamento de páginas (SPA)
+- **Axios** — cliente HTTP para comunicação com a API
+- **Montserrat** — fonte principal do design system
+- **Design System** próprio com variáveis CSS (paleta roxa `#320b80`)
 
 ---
 

@@ -1,0 +1,159 @@
+.cadastro {
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #320b80 0%, #4a1db8 30%, #f5f2fd 60%, #faf9fd 100%);
+}
+
+.cadastro-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 40px;
+  width: 100%;
+}
+
+.cadastro-card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 44px 44px;
+  box-shadow: var(--shadow-lg);
+  max-width: 460px;
+  width: 100%;
+}
+
+/* --- Logo --- */
+.cadastro-brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.cadastro-logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* --- Textos --- */
+.cadastro-card h2 {
+  font-size: 26px;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.cadastro-subtitle {
+  color: var(--text-light);
+  font-size: 14px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* --- Campos --- */
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.campo input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.campo input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-10);
+}
+
+.campo input::placeholder {
+  color: #b0abc4;
+}
+
+/* --- Campo com erro --- */
+.campo--erro input {
+  border-color: var(--error);
+}
+
+.campo--erro input:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.10);
+}
+
+.campo-msg {
+  display: block;
+  font-size: 13px;
+  color: var(--error);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* --- Sucesso --- */
+.cadastro-sucesso {
+  text-align: center;
+  padding: 56px 44px;
+}
+
+.sucesso-icone {
+  font-size: 56px;
+  margin-bottom: 16px;
+}
+
+.cadastro-sucesso h2 {
+  margin-bottom: 12px;
+}
+
+.cadastro-sucesso p {
+  color: var(--text-light);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* --- Link login --- */
+.cadastro-login-link {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 28px;
+}
+
+/* --- Footer --- */
+.cadastro-footer {
+  text-align: center;
+  padding: 20px 24px 28px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 480px) {
+  .cadastro {
+    background: linear-gradient(160deg, #320b80 0%, #4a1db8 30%, #f5f2fd 55%, #faf9fd 100%);
+  }
+
+  .cadastro-card {
+    padding: 32px 20px;
+    border-radius: var(--radius-lg);
+  }
+
+  .cadastro-logo-img {
+    height: 50px;
+  }
+
+  .cadastro-footer {
+    color: var(--text-light);
+  }
+}
