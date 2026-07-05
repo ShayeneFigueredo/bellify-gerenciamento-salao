@@ -52,7 +52,7 @@ export default function Login() {
 
           <h2>Entrar</h2>
           <p className="login-subtitle">
-            Acesse o painel de gestão do seu salão.
+            Acesse sua conta na plataforma.
           </p>
 
           {erro && (
@@ -63,7 +63,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} noValidate>
             <div className="campo">
-              <label htmlFor="email">E-mail do salão</label>
+              <label htmlFor="email">E-mail</label>
               <input
                 id="email"
                 name="email"

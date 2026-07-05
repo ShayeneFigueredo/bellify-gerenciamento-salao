@@ -4,7 +4,22 @@ import { cadastrar } from '../services/auth'
 import logoBellify from '../assets/logo-bellify.png'
 import './Cadastro.css'
 
-const inicial = { salao: '', email: '', telefone: '', senha: '', confirmarSenha: '' }
+const PERFIS = [
+  { value: 'admin', label: 'Administrador', desc: 'Gerenciar meu salão' },
+  { value: 'profissional', label: 'Profissional', desc: 'Atender clientes' },
+]
+
+const inicial = {
+  perfil: 'cliente',
+  nome: '',
+  salao: '',
+  email: '',
+  telefone: '',
+  endereco: '',
+  especialidade: '',
+  senha: '',
+  confirmarSenha: '',
+}
 
 export default function Cadastro() {
   const [form, setForm] = useState(inicial)
@@ -12,6 +27,7 @@ export default function Cadastro() {
   const [enviando, setEnviando] = useState(false)
   const [erroServidor, setErroServidor] = useState('')
   const [sucesso, setSucesso] = useState(false)
+  const [escolhendoPerfil, setEscolhendoPerfil] = useState(false)
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -20,13 +36,37 @@ export default function Cadastro() {
     if (erroServidor) setErroServidor('')
   }
 
+  function selecionarPerfil(perfil) {
+    setForm((f) => ({ ...inicial, perfil }))
+    setErros({})
+    setErroServidor('')
+    setEscolhendoPerfil(false)
+  }
+
   function validar() {
     const novosErros = {}
 
-    if (!form.salao.trim()) {
-      novosErros.salao = 'Nome do salão é obrigatório.'
-    } else if (form.salao.trim().length < 3) {
-      novosErros.salao = 'Nome deve ter pelo menos 3 caracteres.'
+    if (form.perfil === 'cliente' || form.perfil === 'profissional') {
+      if (!form.nome.trim()) {
+        novosErros.nome = 'Nome é obrigatório.'
+      } else if (form.nome.trim().length < 3) {
+        novosErros.nome = 'Nome deve ter pelo menos 3 caracteres.'
+      }
+    }
+
+    if (form.perfil === 'admin') {
+      if (!form.salao.trim()) {
+        novosErros.salao = 'Nome do salão é obrigatório.'
+      }
+      if (!form.endereco.trim()) {
+        novosErros.endereco = 'Endereço do salão é obrigatório.'
+      }
+    }
+
+    if (form.perfil === 'profissional') {
+      if (!form.especialidade.trim()) {
+        novosErros.especialidade = 'Especialidade é obrigatória.'
+      }
     }
 
     if (!form.email.trim()) {
@@ -69,9 +109,13 @@ export default function Cadastro() {
 
     try {
       await cadastrar({
+        perfil: form.perfil,
+        nome: form.nome.trim(),
         salao: form.salao.trim(),
         email: form.email.trim(),
         telefone: form.telefone.trim(),
+        endereco: form.endereco.trim(),
+        especialidade: form.especialidade.trim(),
         senha: form.senha,
       })
       setSucesso(true)
@@ -87,15 +131,16 @@ export default function Cadastro() {
   }
 
   if (sucesso) {
+    const nomeExibicao = form.perfil === 'admin' ? form.salao : form.nome
     return (
       <div className="page cadastro">
         <main className="cadastro-main">
           <div className="cadastro-card cadastro-sucesso">
             <div className="sucesso-icone">✅</div>
-            <h2>Salão cadastrado!</h2>
+            <h2>Cadastro realizado!</h2>
             <p>
-              O <strong>{form.salao}</strong> foi registrado com sucesso.
-              Agora é só fazer login e começar a gerenciar.
+              <strong>{nomeExibicao}</strong>, sua conta foi criada com sucesso.
+              Agora é só fazer login e começar a usar o Bellify.
             </p>
             <Link to="/login" className="btn btn-primary">
               Ir para o Login
@@ -106,6 +151,67 @@ export default function Cadastro() {
     )
   }
 
+  // --- Tela de escolha (admin / profissional) ---
+  if (escolhendoPerfil) {
+    return (
+      <div className="page cadastro">
+        <main className="cadastro-main">
+          <div className="cadastro-card">
+            <div className="cadastro-brand">
+              <img src={logoBellify} alt="Bellify" className="cadastro-logo-img" />
+            </div>
+
+            <h2>Criar sua conta</h2>
+            <p className="cadastro-subtitle">
+              Selecione o perfil para continuar.
+            </p>
+
+            <div className="perfis">
+              {PERFIS.map((p) => (
+                <button
+                  key={p.value}
+                  type="button"
+                  className="perfil-card"
+                  onClick={() => selecionarPerfil(p.value)}
+                >
+                  <span className="perfil-card-label">{p.label}</span>
+                  <span className="perfil-card-desc">{p.desc}</span>
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="btn btn-outline btn-full"
+              style={{ marginTop: 20 }}
+              onClick={() => {
+                setForm((f) => ({ ...inicial, perfil: 'cliente' }))
+                setEscolhendoPerfil(false)
+              }}
+            >
+              Voltar
+            </button>
+
+            <p className="cadastro-login-link">
+              Já tem conta? <Link to="/login">Faça login</Link>
+            </p>
+          </div>
+        </main>
+
+        <footer className="cadastro-footer">
+          <p>Bellify © 2026 — Trabalho Acadêmico</p>
+        </footer>
+      </div>
+    )
+  }
+
+  // --- Formulário de cadastro (único, adapta por perfil) ---
+  const subtitulos = {
+    cliente: 'Cadastre-se e comece a agendar.',
+    admin: 'Registre seu salão no Bellify.',
+    profissional: 'Cadastre-se para atender clientes.',
+  }
+
   return (
     <div className="page cadastro">
       <main className="cadastro-main">
@@ -114,10 +220,8 @@ export default function Cadastro() {
             <img src={logoBellify} alt="Bellify" className="cadastro-logo-img" />
           </div>
 
-          <h2>Criar conta do salão</h2>
-          <p className="cadastro-subtitle">
-            Registre seu salão no Bellify e organize tudo em um só lugar.
-          </p>
+          <h2>Criar sua conta</h2>
+          <p className="cadastro-subtitle">{subtitulos[form.perfil]}</p>
 
           {erroServidor && (
             <div className="alerta alerta-erro" role="alert">
@@ -126,27 +230,89 @@ export default function Cadastro() {
           )}
 
           <form onSubmit={handleSubmit} noValidate>
-            <div className={`campo ${erros.salao ? 'campo--erro' : ''}`}>
-              <label htmlFor="salao">Nome do salão</label>
-              <input
-                id="salao"
-                name="salao"
-                type="text"
-                placeholder="Ex: Studio Glamour"
-                value={form.salao}
-                onChange={handleChange}
-                autoComplete="organization"
-              />
-              {erros.salao && <span className="campo-msg">{erros.salao}</span>}
-            </div>
+            {/* Nome — cliente e profissional */}
+            {(form.perfil === 'cliente' || form.perfil === 'profissional') && (
+              <div className={`campo ${erros.nome ? 'campo--erro' : ''}`}>
+                <label htmlFor="nome">Nome completo</label>
+                <input
+                  id="nome"
+                  name="nome"
+                  type="text"
+                  placeholder={form.perfil === 'cliente' ? 'Seu nome completo' : 'Seu nome profissional'}
+                  value={form.nome}
+                  onChange={handleChange}
+                  autoComplete="name"
+                />
+                {erros.nome && <span className="campo-msg">{erros.nome}</span>}
+              </div>
+            )}
 
+            {/* Admin — salão + endereço */}
+            {form.perfil === 'admin' && (
+              <>
+                <div className={`campo ${erros.salao ? 'campo--erro' : ''}`}>
+                  <label htmlFor="salao">Nome do salão</label>
+                  <input
+                    id="salao"
+                    name="salao"
+                    type="text"
+                    placeholder="Ex: Studio Glamour"
+                    value={form.salao}
+                    onChange={handleChange}
+                    autoComplete="organization"
+                  />
+                  {erros.salao && <span className="campo-msg">{erros.salao}</span>}
+                </div>
+
+                <div className={`campo ${erros.endereco ? 'campo--erro' : ''}`}>
+                  <label htmlFor="endereco">Endereço do salão</label>
+                  <input
+                    id="endereco"
+                    name="endereco"
+                    type="text"
+                    placeholder="Rua, número, bairro, cidade"
+                    value={form.endereco}
+                    onChange={handleChange}
+                    autoComplete="street-address"
+                  />
+                  {erros.endereco && <span className="campo-msg">{erros.endereco}</span>}
+                </div>
+              </>
+            )}
+
+            {/* Profissional — especialidade */}
+            {form.perfil === 'profissional' && (
+              <div className={`campo ${erros.especialidade ? 'campo--erro' : ''}`}>
+                <label htmlFor="especialidade">Especialidade</label>
+                <select
+                  id="especialidade"
+                  name="especialidade"
+                  value={form.especialidade}
+                  onChange={handleChange}
+                  className="campo-select"
+                >
+                  <option value="">Selecione...</option>
+                  <option value="cabeleireiro">Cabeleireiro(a)</option>
+                  <option value="manicure">Manicure</option>
+                  <option value="esteticista">Esteticista</option>
+                  <option value="maquiador">Maquiador(a)</option>
+                  <option value="barbeiro">Barbeiro</option>
+                  <option value="depilador">Depilador(a)</option>
+                  <option value="massoterapeuta">Massoterapeuta</option>
+                  <option value="outro">Outro</option>
+                </select>
+                {erros.especialidade && <span className="campo-msg">{erros.especialidade}</span>}
+              </div>
+            )}
+
+            {/* Campos comuns */}
             <div className={`campo ${erros.email ? 'campo--erro' : ''}`}>
-              <label htmlFor="email">E-mail do salão</label>
+              <label htmlFor="email">E-mail</label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="contato@studiosalao.com.br"
+                placeholder="seu@email.com"
                 value={form.email}
                 onChange={handleChange}
                 autoComplete="email"
@@ -210,6 +376,31 @@ export default function Cadastro() {
               {enviando ? 'Cadastrando...' : 'Criar conta'}
             </button>
           </form>
+
+          {/* Link "Não sou cliente" só aparece no cadastro de cliente */}
+          {form.perfil === 'cliente' && (
+            <p className="cadastro-outro-perfil">
+              <button
+                type="button"
+                className="link-btn"
+                onClick={() => setEscolhendoPerfil(true)}
+              >
+                Não sou cliente
+              </button>
+            </p>
+          )}
+
+          {/* Botão Voltar para admin/profissional */}
+          {form.perfil !== 'cliente' && (
+            <button
+              type="button"
+              className="btn btn-outline btn-full"
+              style={{ marginTop: 24 }}
+              onClick={() => setEscolhendoPerfil(true)}
+            >
+              Voltar
+            </button>
+          )}
 
           <p className="cadastro-login-link">
             Já tem conta? <Link to="/login">Faça login</Link>
