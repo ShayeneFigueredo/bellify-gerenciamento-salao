@@ -1,10 +1,12 @@
 package com.back.pdsBackend.service;
 
 import com.back.pdsBackend.dto.CadastroRequest;
+import com.back.pdsBackend.dto.CreateUserRequest;
 import com.back.pdsBackend.model.PerfilUsuario;
 import com.back.pdsBackend.model.User;
 import com.back.pdsBackend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,19 @@ public class UserService {
     public UserService(UserRepository repositorioUsuario, PasswordEncoder codificadorSenha) {
         this.repositorioUsuario = repositorioUsuario;
         this.codificadorSenha = codificadorSenha;
+    }
+
+    public User criar(CreateUserRequest requisicao) {
+        return criarUsuario(
+                requisicao.nome(),
+                requisicao.email(),
+                requisicao.senha(),
+                PerfilUsuario.CLIENTE,
+                null,
+                null,
+                null,
+                null
+        );
     }
 
     public User cadastrar(CadastroRequest requisicao) {
@@ -63,9 +78,23 @@ public class UserService {
         return repositorioUsuario.save(usuario);
     }
 
+    public List<User> listarTodos() {
+        return repositorioUsuario.findAll();
+    }
+
+    public User buscarPorId(Long id) {
+        return repositorioUsuario.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario nao encontrado: " + id));
+    }
+
     public User buscarPorEmail(String email) {
         return repositorioUsuario.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario nao encontrado: " + email));
+    }
+
+    public boolean verificarSenha(Long id, String senha) {
+        User usuario = buscarPorId(id);
+        return codificadorSenha.matches(senha, usuario.getSenhaHash());
     }
 
     public User autenticar(String email, String senha) {
@@ -101,7 +130,7 @@ public class UserService {
             return salaoLimpo;
         }
 
-        throw new IllegalArgumentException("Nome eh obrigatorio");
+        throw new IllegalArgumentException("Nome e obrigatorio");
     }
 
     private String limpar(String valor) {
