@@ -35,6 +35,7 @@ export default function Login() {
       const msg =
         err.response?.data?.mensagem ||
         err.response?.data?.error ||
+        err.response?.data?.detail ||
         'Erro ao conectar com o servidor. Tente novamente.'
       setErro(msg)
     } finally {
