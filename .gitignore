@@ -4,3 +4,9 @@ trabalho-final/
 
 # Pasta do Claude - NAO versionar
 .claude/
+
+# IDE (IntelliJ)
+.idea/
+
+# Build do Maven (backend Java)
+backend/java_Spring/target/
