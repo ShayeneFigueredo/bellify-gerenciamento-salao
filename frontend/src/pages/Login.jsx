@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../services/auth'
 import logoBellify from '../assets/logo-bellify.png'
 import './Login.css'
@@ -10,6 +10,7 @@ export default function Login() {
   const [form, setForm] = useState(inicial)
   const [enviando, setEnviando] = useState(false)
   const [erro, setErro] = useState('')
+  const navigate = useNavigate()
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -29,8 +30,9 @@ export default function Login() {
     setEnviando(true)
     try {
       const dados = await login({ email: form.email.trim(), senha: form.senha })
-      // TODO: salvar token e redirecionar para o dashboard
-      console.log('Login OK:', dados)
+      localStorage.setItem('bellify_token', dados.token)
+      localStorage.setItem('bellify_usuario', JSON.stringify(dados.usuario))
+      navigate('/admin')
     } catch (err) {
       const msg =
         err.response?.data?.mensagem ||
