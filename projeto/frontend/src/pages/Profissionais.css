@@ -1,0 +1,259 @@
+/* ============================================
+   Profissionais - Lista, Tabela, Formulario
+   ============================================ */
+
+/* --- Header --- */
+.prof-info {
+  color: var(--text-light);
+  font-size: 14px;
+  padding: 12px 0;
+}
+
+.prof-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.prof-header h2 {
+  font-size: 22px;
+  color: var(--text-heading);
+}
+
+/* --- Estado vazio --- */
+.prof-vazio {
+  text-align: center;
+  padding: 64px 24px;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border);
+}
+
+.prof-vazio-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.prof-vazio-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.prof-vazio-titulo {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+}
+
+.prof-vazio-desc {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 24px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Tabela --- */
+.prof-tabela-wrapper {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.prof-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prof-tabela thead {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.prof-tabela th {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  text-align: left;
+}
+
+.prof-tabela td {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.prof-tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.prof-nome {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+/* --- Formulario --- */
+.prof-form-wrapper {
+  max-width: 600px;
+}
+
+.prof-voltar {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.prof-voltar:hover {
+  color: var(--primary);
+}
+
+.prof-form-wrapper h2 {
+  font-size: 22px;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+
+.prof-subtitle {
+  color: var(--text-light);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.prof-acoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* --- Sucesso --- */
+.prof-sucesso {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.prof-sucesso h2 {
+  margin-bottom: 8px;
+}
+
+.prof-sucesso p {
+  color: var(--text-light);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.prof-sucesso-acoes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* --- Campos --- */
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.campo input,
+.campo-select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+.campo input:focus,
+.campo-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-10);
+}
+
+.campo input::placeholder {
+  color: #b0abc4;
+}
+
+.campo-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%238b85a6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.campo--erro input,
+.campo--erro .campo-select {
+  border-color: var(--error);
+}
+
+.campo--erro input:focus,
+.campo--erro .campo-select:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.10);
+}
+
+.campo-msg {
+  display: block;
+  font-size: 13px;
+  color: var(--error);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Alerta */
+.alerta {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.alerta-erro {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid #fecaca;
+}
+
+@media (max-width: 480px) {
+  .prof-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .prof-acoes {
+    flex-direction: column;
+  }
+
+  .prof-tabela th,
+  .prof-tabela td {
+    padding: 12px 16px;
+  }
+}

@@ -1,0 +1,459 @@
+/* ============================================
+   Cliente — Agendamento (wizard) e Meus agendamentos
+   ============================================ */
+
+.agendamento-voltar {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.agendamento-voltar:hover {
+  color: var(--primary);
+}
+
+/* --- Serviço escolhido (faixa) --- */
+.agendamento-servico {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 20px;
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+
+.agendamento-servico-nome {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.agendamento-servico-meta {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* --- Passos --- */
+.agendamento-passos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.passo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.passo--ativo {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* --- Bloco de cada etapa --- */
+.agendamento-bloco h3 {
+  font-size: 18px;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+}
+
+.agendamento-info {
+  color: var(--text-light);
+  font-size: 14px;
+  padding: 12px 0;
+}
+
+/* --- Lista de profissionais --- */
+.prof-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.prof-opcao {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 16px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.18s, background 0.18s;
+  font-family: var(--font-body);
+}
+
+.prof-opcao:hover {
+  border-color: var(--primary-muted);
+}
+
+.prof-opcao--sel {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.prof-opcao-nome {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.prof-opcao-esp {
+  font-size: 13px;
+  color: var(--text-light);
+  text-transform: capitalize;
+}
+
+/* --- Campo de data --- */
+.agendamento-campo {
+  margin-bottom: 20px;
+}
+
+.agendamento-campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.agendamento-campo input[type='date'] {
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--surface);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.agendamento-campo input[type='date']:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-10);
+}
+
+/* --- Slots de horário --- */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.slot {
+  padding: 12px 0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.slot:hover {
+  border-color: var(--primary-muted);
+}
+
+.slot--sel {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+/* --- Resumo --- */
+.resumo {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.resumo-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.resumo-linha:last-child {
+  border-bottom: none;
+}
+
+.resumo-linha span {
+  color: var(--text-light);
+}
+
+.resumo-linha strong {
+  color: var(--text-heading);
+  text-transform: capitalize;
+}
+
+/* --- Navegação entre etapas --- */
+.agendamento-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* --- Sucesso --- */
+.agendamento-sucesso {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.agendamento-sucesso-icone {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  color: var(--success);
+  font-size: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.agendamento-sucesso h2 {
+  margin-bottom: 12px;
+}
+
+.agendamento-sucesso p {
+  color: var(--text-light);
+  font-size: 15px;
+  margin-bottom: 24px;
+  text-transform: capitalize;
+}
+
+.agendamento-sucesso-acoes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.agendamento-vazio {
+  text-align: center;
+  padding: 56px 24px;
+  color: var(--text-light);
+}
+
+.agendamento-vazio p {
+  margin-bottom: 16px;
+}
+
+/* ============================================
+   Meus agendamentos
+   ============================================ */
+
+.meus-agend-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.meus-agend-cabecalho h2 {
+  font-size: 24px;
+  color: var(--text-heading);
+}
+
+.meus-agend-vazio {
+  text-align: center;
+  padding: 56px 24px;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border);
+}
+
+.meus-agend-vazio-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.meus-agend-vazio-desc {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.agend-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agend-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.agend-card--cancelado {
+  opacity: 0.6;
+}
+
+.agend-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agend-card-servico {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.agend-card-prof {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.agend-card-quando {
+  font-size: 13px;
+  color: var(--text-light);
+  text-transform: capitalize;
+}
+
+.agend-card-lado {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.agend-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.agend-badge--confirmado {
+  background: var(--success-bg);
+  color: #15803d;
+}
+
+.agend-badge--cancelado {
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.agend-badge--concluido {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.agend-cancelar {
+  background: transparent;
+  border: none;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  padding: 4px;
+}
+
+.agend-cancelar:hover {
+  text-decoration: underline;
+}
+
+/* --- Botão de perigo --- */
+.btn-perigo {
+  background: var(--error);
+  color: #fff;
+}
+
+.btn-perigo:hover {
+  background: #b02a37;
+  color: #fff;
+}
+
+/* --- Modal de confirmação --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 21, 53, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal h3 {
+  font-size: 18px;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+}
+
+.modal p {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 24px;
+  text-transform: capitalize;
+}
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 640px) {
+  .agend-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .agendamento-nav {
+    flex-direction: column-reverse;
+  }
+
+  .agendamento-nav .btn {
+    width: 100%;
+  }
+}

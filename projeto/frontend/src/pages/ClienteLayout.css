@@ -1,0 +1,120 @@
+/* ============================================
+   Cliente — Layout (header no topo)
+   ============================================ */
+
+.cliente-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.cliente-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 32px;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+
+.cliente-header-brand {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.cliente-header-brand:hover {
+  opacity: 0.85;
+}
+
+.cliente-header-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.cliente-nav {
+  display: flex;
+  gap: 8px;
+  margin: 0 auto 0 32px;
+}
+
+.cliente-nav-item {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  transition: background 0.15s, color 0.15s;
+}
+
+.cliente-nav-item:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cliente-nav-item--ativo {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cliente-header-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cliente-header-sair {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  margin-left: 4px;
+  transition: background 0.15s;
+}
+
+.cliente-header-sair:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cliente-main {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+@media (max-width: 640px) {
+  .cliente-header {
+    padding: 0 12px;
+  }
+
+  .cliente-nav {
+    margin: 0 auto 0 10px;
+    gap: 2px;
+  }
+
+  .cliente-nav-item {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .cliente-header-user span {
+    display: none;
+  }
+
+  .cliente-main {
+    padding: 20px 16px;
+  }
+}

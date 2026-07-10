@@ -1,0 +1,145 @@
+/* ============================================
+   Admin — Agendamentos (tabela)
+   ============================================ */
+
+.adm-agend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.adm-agend-header h2 {
+  font-size: 22px;
+  color: var(--text-heading);
+}
+
+.adm-agend-filtros {
+  display: flex;
+  gap: 8px;
+}
+
+.adm-agend-filtro {
+  padding: 8px 16px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+
+.adm-agend-filtro:hover {
+  border-color: var(--primary-muted);
+}
+
+.adm-agend-filtro--ativo {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.adm-agend-info {
+  color: var(--text-light);
+  font-size: 14px;
+  padding: 12px 0;
+}
+
+/* --- Estado vazio --- */
+.adm-agend-vazio {
+  text-align: center;
+  padding: 56px 24px;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border);
+}
+
+.adm-agend-vazio-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.adm-agend-vazio-desc {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* --- Tabela --- */
+.adm-agend-tabela-wrapper {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.adm-agend-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.adm-agend-tabela thead {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.adm-agend-tabela th {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  text-align: left;
+}
+
+.adm-agend-tabela td {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.adm-agend-tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.adm-agend-hora {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+/* --- Badge --- */
+.adm-agend-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.adm-agend-badge--confirmado {
+  background: var(--success-bg);
+  color: #15803d;
+}
+
+.adm-agend-badge--cancelado {
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.adm-agend-badge--concluido {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.adm-agend-badge--pendente {
+  background: #fff8ec;
+  color: #92650a;
+}
