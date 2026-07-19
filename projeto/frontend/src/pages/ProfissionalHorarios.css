@@ -1,0 +1,239 @@
+/* ============================================
+   Profissional — Horários de atendimento
+   ============================================ */
+
+.horarios-wrapper {
+  max-width: 720px;
+}
+
+/* --- Cabeçalho --- */
+.horarios-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.horarios-cabecalho h2 {
+  font-size: 22px;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.horarios-subtitle {
+  color: var(--text-light);
+  font-size: 14px;
+  max-width: 420px;
+}
+
+.horarios-aplicar {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 0;
+  white-space: nowrap;
+}
+
+.horarios-aplicar:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* --- Lista de dias --- */
+.horarios-lista {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.horario-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.horario-item:last-child {
+  border-bottom: none;
+}
+
+.horario-linha {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.horario-dia {
+  font-weight: 600;
+  color: var(--text-heading);
+  font-size: 15px;
+  min-width: 140px;
+}
+
+.horario-item--inativo .horario-dia {
+  color: var(--text-light);
+}
+
+.horario-intervalo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.horario-intervalo input[type='time'] {
+  padding: 9px 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.horario-intervalo input[type='time']:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-10);
+}
+
+.horario-ate {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.horario-fechado {
+  margin-left: auto;
+  color: var(--text-light);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.horarios-acoes {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* --- Toggle (switch) --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+
+.switch-slider::before {
+  content: '';
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+}
+
+.switch input:checked + .switch-slider {
+  background: var(--primary);
+}
+
+.switch input:checked + .switch-slider::before {
+  transform: translateX(18px);
+}
+
+.switch input:focus-visible + .switch-slider {
+  box-shadow: 0 0 0 3px var(--primary-10);
+}
+
+/* --- Item de menu desabilitado (sidebar do profissional) --- */
+.sidebar-item--desabilitado {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sidebar-item--desabilitado:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* --- Campos e alertas (compartilhados) --- */
+.campo-msg {
+  display: block;
+  font-size: 13px;
+  color: var(--error);
+  margin-top: 8px;
+  margin-left: 58px;
+  font-weight: 500;
+}
+
+.alerta {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.alerta-sucesso {
+  background: var(--success-bg);
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.alerta-erro {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid #fecaca;
+}
+
+.alerta-aviso {
+  background: #fff8ec;
+  color: #92650a;
+  border: 1px solid #f5d99b;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 640px) {
+  .horarios-cabecalho {
+    flex-direction: column;
+  }
+
+  .horario-linha {
+    flex-wrap: wrap;
+  }
+
+  .horario-dia {
+    min-width: 0;
+  }
+
+  .horario-intervalo,
+  .horario-fechado {
+    margin-left: 58px;
+    width: 100%;
+  }
+
+  .campo-msg {
+    margin-left: 0;
+  }
+}
