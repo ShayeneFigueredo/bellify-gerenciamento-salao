@@ -2,6 +2,7 @@ package com.back.pdsBackend.service;
 
 import com.back.pdsBackend.dto.CadastroRequest;
 import com.back.pdsBackend.dto.CreateUserRequest;
+import com.back.pdsBackend.dto.ProfissionalRequest;
 import com.back.pdsBackend.model.PerfilUsuario;
 import com.back.pdsBackend.model.User;
 import com.back.pdsBackend.repository.UserRepository;
@@ -80,6 +81,23 @@ public class UserService {
 
     public List<User> listarTodos() {
         return repositorioUsuario.findAll();
+    }
+
+    public List<User> listarProfissionais() {
+        return repositorioUsuario.findByPerfil(PerfilUsuario.PROFISSIONAL);
+    }
+
+    public User cadastrarProfissional(ProfissionalRequest requisicao) {
+        return criarUsuario(
+                requisicao.nome(),
+                requisicao.email(),
+                "123456",
+                PerfilUsuario.PROFISSIONAL,
+                limpar(requisicao.telefone()),
+                null,
+                null,
+                limpar(requisicao.especialidade())
+        );
     }
 
     public User buscarPorId(Long id) {

@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(autorizacao -> autorizacao
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/usuarios/**").permitAll()
+                        .requestMatchers("/usuarios/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .build();
