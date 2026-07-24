@@ -1,0 +1,314 @@
+Subtarefas - Bellify (documento acumulativo por sprint)
+
+Responsavel Frontend: Shayene
+Responsavel Backend: time de back (Java Spring)
+
+Legenda de status:
+  [FEITO]     concluido
+  [PENDENTE]  ainda nao iniciado / aguardando
+
+
+########################################################
+# SPRINT 3 (Entrega E3) - CONCLUIDA (front)
+# Periodo: 11 a 18 de julho de 2026
+########################################################
+
+SCRUM 19 - Como profissional, eu quero definir meus horarios de atendimento
+
+19.1  [FEITO]
+Criar area do profissional: layout proprio (ProfSidebar/ProfTopbar reusando
+o design system do admin), rota /profissional e item de menu "Meus horarios"
+Story point: 2
+
+19.2  [FEITO]
+Tela "Meus horarios": grade semanal (7 dias) com toggle atende/nao atende
+por dia e faixa de inicio-fim, mais atalho "aplicar segunda aos dias uteis"
+Story point: 2
+
+19.3  [FEITO]
+Validacao local (dias ativos exigem inicio/fim e fim depois do inicio;
+aviso quando nenhum dia esta ativo) + persistencia em localStorage
+enquanto o endpoint nao existe (TODO PUT /api/profissionais/{id}/horarios)
+Story point: 1
+
+19.4  [FEITO]
+Home do profissional: saudacao "Bem-vindo(a), {nome}!" (nome do usuario
+logado), data de hoje por extenso e tabela "Agenda de hoje"
+(horario, cliente, servico, status com badge) + roteamento por perfil
+no login (profissional vai para /profissional)
+Story point: 2
+
+  Backend:
+  19.5  [PENDENTE]
+  Endpoint PUT /api/profissionais/{id}/horarios (salvar) e
+  GET /api/profissionais/{id}/horarios (carregar) persistindo a grade
+  semanal (dia, ativo, inicio, fim)
+  Story point: 2
+
+
+SCRUM 20 - Como cliente, eu quero visualizar os servicos disponiveis
+e escolher um
+
+20.1  [FEITO]
+Criar area do cliente: layout com header (ClienteLayout), rota /cliente e
+listagem dos servicos disponiveis em cards (nome, duracao, preco) com
+estado vazio "Nenhum servico disponivel"
+Story point: 2
+
+20.2  [FEITO]
+Selecao de um servico (card com estado selecionado/destaque) e acao
+"Escolher e continuar" que salva a escolha e leva para o placeholder de
+agendamento (/cliente/agendamento)
+Story point: 1
+
+20.3  [FEITO]
+Busca/filtro por nome do servico na listagem
+Story point: 1
+
+20.4  [FEITO]
+Camada de servico HTTP (services/servicos.js) consumindo
+GET /api/servicos, com fallback/mock enquanto o back nao entrega
+Story point: 1
+
+  Backend:
+  20.5  [PENDENTE]
+  GET /api/servicos (listar servicos disponiveis) com ServicoResponse
+  { id, nome, duracao, preco } - mesma base da persistencia de servicos
+  Story point: 2
+
+
+BACKEND EM ANDAMENTO (movido da Sprint 2 para a Sprint 3)
+
+SCRUM 17 (Backend) - Persistencia de servicos
+
+  17.6  [PENDENTE]
+  Criar entidade Servico (JPA) e repository.
+  Tabela servicos: id, nome, descricao (opcional), duracao_minutos, preco.
+  Story point: 1
+
+  17.7  [PENDENTE]
+  Endpoints POST /api/servicos (criar) e GET /api/servicos (listar),
+  com DTOs (CreateServicoRequest / ServicoResponse), validacao
+  (nome obrigatorio, duracao e preco maiores que zero) e rota
+  liberada no SecurityConfig.
+  Story point: 2
+
+SCRUM 18 (Backend) - Persistencia de profissionais
+
+  18.5  [PENDENTE]
+  Criar entidade Profissional (JPA) e repository.
+  Tabela profissionais: id, nome, email (unico), telefone,
+  especialidade, ativo.
+  Story point: 1
+
+  18.6  [PENDENTE]
+  Endpoints POST /api/profissionais (criar) e GET /api/profissionais
+  (listar), com DTOs (CreateProfissionalRequest / ProfissionalResponse),
+  validacao, e-mail unico e rota liberada no SecurityConfig.
+  Story point: 2
+
+========================================================
+ STORY POINTS DA SPRINT 3
+   Frontend (feito) ...... 12 de 12  (100%)
+   Backend  (feito) ......  0 de 10  (pendente/aguardando)
+   TOTAL SPRINT .......... 12 de 22
+========================================================
+
+
+########################################################
+# SPRINT 4 (Entrega E4) - EM ANDAMENTO
+# Periodo: 20 a 23 de julho de 2026
+########################################################
+
+SCRUM 21 - Como cliente, eu quero agendar um servico com um profissional
+num horario livre
+
+21.1  [FEITO]
+Tela de agendamento (substituir o placeholder /cliente/agendamento):
+a partir do servico ja escolhido, listar e selecionar o profissional
+que atende (cards/lista com nome e especialidade) + estado vazio
+Story point: 2
+
+21.2  [FEITO]
+Selecao de data (calendario/seletor) e de horario livre: gerar os slots
+a partir da grade semanal do profissional e marcar como indisponiveis os
+horarios ja ocupados; destacar o slot escolhido
+Story point: 3
+
+21.3  [FEITO]
+Resumo e confirmacao do agendamento (servico, profissional, data, hora)
+com botao "Confirmar agendamento" e tela de sucesso
+Story point: 2
+
+21.4  [FEITO]
+Camada de servico HTTP (services/agendamentos.js): GET de horarios livres
+por profissional/data e POST /api/agendamentos, com fallback/mock enquanto
+o back nao entrega
+Story point: 2
+
+  Backend:
+  21.5  [PENDENTE]
+  GET horarios livres do profissional por data, calculando os slots a partir
+  da grade semanal (SCRUM 19) menos os agendamentos existentes
+  Story point: 3
+
+  21.6  [PENDENTE]
+  Criar entidade Agendamento (JPA) + repository e POST /api/agendamentos
+  (criar) validando conflito de horario (nao permitir dois no mesmo slot)
+  Story point: 3
+
+
+SCRUM 22 - Como cliente, eu quero cancelar um agendamento
+
+22.1  [FEITO]
+Tela "Meus agendamentos" do cliente: listar os agendamentos do cliente
+(servico, profissional, data, hora, status) em cards/tabela, com estado
+vazio "Voce ainda nao tem agendamentos" + link no header do cliente
+Story point: 2
+
+22.2  [FEITO]
+Acao "Cancelar" em cada agendamento com modal de confirmacao
+("Tem certeza que deseja cancelar?") antes de efetivar
+Story point: 2
+
+22.3  [FEITO]
+Atualizar status para "cancelado" na UI + feedback de sucesso; respeitar
+regra de negocio (nao permitir cancelar agendamento ja passado/concluido)
+Story point: 1
+
+22.4  [FEITO]
+Camada de servico HTTP (services/agendamentos.js): GET agendamentos do
+cliente e cancelar (DELETE ou PATCH status) /api/agendamentos/{id},
+com fallback/mock enquanto o back nao entrega
+Story point: 2
+
+  Backend:
+  22.5  [PENDENTE]
+  GET /api/agendamentos?cliente=me (listar agendamentos do cliente logado)
+  Story point: 2
+
+  22.6  [PENDENTE]
+  Cancelamento: DELETE ou PATCH status=cancelado em /api/agendamentos/{id},
+  com regra de prazo (bloquear cancelamento de horario ja passado)
+  Story point: 2
+
+
+SCRUM 23 - Como administrador, eu gostaria de visualizar indicadores do
+salao (agendamentos, faturamento, cancelamentos) num painel
+
+23.1  [FEITO]
+Painel de indicadores no Dashboard do admin: cards com "Agendamentos ativos",
+"Faturamento previsto" (R$) e "Cancelamentos", com estado de carregamento
+Story point: 2
+
+23.2  [FEITO]
+Camada de dados (services/indicadores.js) que agrega os numeros a partir dos
+agendamentos (fallback) e consome GET /api/relatorios/indicadores quando existir
+Story point: 1
+
+  Backend:
+  23.3  [PENDENTE]
+  GET /api/relatorios/indicadores agregando agendamentos, faturamento e
+  cancelamentos do salao
+  Story point: 3
+
+
+EXTRAS DA SPRINT 4 (melhorias de front, sem back)
+
+EX.1  [FEITO]
+Profissional: pagina "Minha agenda" (/profissional/agenda) listando todos os
+atendimentos agrupados por data, com status; item de menu habilitado
+Story point: 1
+
+EX.2  [FEITO]
+Admin: pagina "Ver agendamentos" (/admin/agendamentos) com tabela completa
+(data, hora, cliente, servico, profissional, status) e filtro por status;
+item de menu e acao rapida habilitados
+Story point: 2
+
+EX.3  [FEITO]
+Cliente: saudacao "Bem-vindo(a), {nome}!" na tela inicial de servicos
+Story point: 1
+
+EX.4  [FEITO]
+Logout nas 3 areas (admin, profissional e cliente): botao "Sair" que limpa
+token/usuario do localStorage e volta para o login
+Story point: 1
+
+EX.5  [FEITO]
+Remocao de todos os dados mock/fake: o front passa a consumir apenas a API
+(listas vazias e erros honestos enquanto o back nao existe); formularios de
+servico/profissional fazem POST real; horarios do profissional via GET/PUT
+Story point: 2
+
+EX.6  [FEITO]
+Pagina 404 (rota catch-all) para enderecos desconhecidos
+Story point: 1
+
+
+Historias pendentes (proximas entregas)
+
+(nenhuma no momento - SCRUM 21, 22 e 23 sao o escopo da Sprint 4)
+
+
+========================================================
+ STORY POINTS DA SPRINT 4
+   SCRUM 21 - Cliente agenda servico .... 15  (front 9 + back 6)
+   SCRUM 22 - Cliente cancela agend. .... 11  (front 7 + back 4)
+   SCRUM 23 - Indicadores do salao ......  6  (front 3 + back 3)
+   Extras de front (EX.1-EX.6) ..........  8  (front 8 + back 0)
+   -----------------------
+   Frontend (feito) ...... 27 de 27  (100%)
+   Backend  (feito) ......  0 de 13  (pendente/aguardando)
+   TOTAL SPRINT .......... 27 de 40
+========================================================
+
+
+########################################################
+# REFERENCIAS
+########################################################
+
+Alinhamento enviado ao backend (pendente de resposta)
+
+  - Servicos: GET/POST /api/servicos  Body { nome, duracao(min), preco }
+  - Profissionais: reusar User perfil=profissional (/api/usuarios) OU
+    entidade propria /api/profissionais; como listar so profissionais
+  - Token: front guarda o token do login mas ainda nao o envia; definir
+    Authorization: Bearer <token> e validacao da SessionToken nas rotas
+    protegidas (hoje caem em httpBasic, nao na sessao)
+  - Vinculo com o salao: back associa pelo token do admin logado ou o
+    front envia o id do salao no payload?
+  - Horarios do profissional: PUT/GET /api/profissionais/{id}/horarios
+  - Agendamentos: GET horarios livres + POST /api/agendamentos
+  - Agendamentos: GET do cliente + cancelar (DELETE ou PATCH status)
+    /api/agendamentos/{id} com regra de prazo
+  - Indicadores: GET /api/relatorios/indicadores (agendamentos, faturamento,
+    cancelamentos) para o painel do admin
+
+
+Titulos prontos para o Jira (copiar/colar):
+  - [FRONT] Profissional: area + tela "Meus horarios" (grade semanal)
+  - [FRONT] Profissional: home com boas-vindas + agenda de hoje
+  - [FRONT] Cliente: area + listagem de servicos disponiveis
+  - [FRONT] Cliente: selecao de servico + busca
+  - [FRONT] Cliente: agendamento - escolher profissional
+  - [FRONT] Cliente: agendamento - escolher data e horario livre
+  - [FRONT] Cliente: agendamento - resumo, confirmacao e sucesso
+  - [FRONT] Cliente: "Meus agendamentos" - listagem
+  - [FRONT] Cliente: cancelar agendamento (confirmacao + feedback)
+  - [FRONT] Admin: painel de indicadores (agendamentos/faturamento/cancelamentos)
+  - [BACK] Servico: entidade JPA + repository
+  - [BACK] Servico: endpoints POST/GET /api/servicos
+  - [BACK] Profissional: entidade JPA + repository
+  - [BACK] Profissional: endpoints POST/GET /api/profissionais
+  - [BACK] Profissional: endpoints de horarios
+  - [BACK] Agendamento: horarios livres + POST /api/agendamentos
+  - [BACK] Agendamento: listar do cliente + cancelar /api/agendamentos/{id}
+  - [BACK] Relatorios: GET /api/relatorios/indicadores
+
+
+Instrucoes para o Claude
+
+- Shayene e FRONTEND. So faz tela, componente, estilo, HTML/CSS/React.
+- NUNCA fazer commit nem push. Quem comanda o git e a Shayene.
+- NUNCA mexer na pasta backend/ - responsabilidade de outra pessoa.

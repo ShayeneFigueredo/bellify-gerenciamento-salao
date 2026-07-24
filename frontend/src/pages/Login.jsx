@@ -32,7 +32,14 @@ export default function Login() {
       const dados = await login({ email: form.email.trim(), senha: form.senha })
       localStorage.setItem('bellify_token', dados.token)
       localStorage.setItem('bellify_usuario', JSON.stringify(dados.usuario))
-      navigate('/admin')
+      const perfil = dados.usuario?.perfil
+      const destino =
+        perfil === 'profissional'
+          ? '/profissional'
+          : perfil === 'cliente'
+            ? '/cliente/servicos'
+            : '/admin'
+      navigate(destino)
     } catch (err) {
       const msg =
         err.response?.data?.mensagem ||

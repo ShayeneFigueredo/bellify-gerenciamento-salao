@@ -1,0 +1,155 @@
+========================================================================
+ ROTEIRO — VÍDEO TRABALHO FINAL E2  (máx. 5 min)
+ Projeto: Bellify — Gestão para Salões de Beleza
+========================================================================
+
+COMO USAR ESTE ROTEIRO
+- [TELA] = o que mostrar na gravação.
+- [FALA] = o que narrar (pode ler quase na íntegra).
+- Textos entre <colchetes> = personalizar com os dados reais do SEU Jira/time.
+- Meta de tempo à esquerda. Ensaie 1x com cronômetro pra não passar de 5min.
+
+ANTES DE GRAVAR (checklist)
+[ ] Postgres ligado:      sudo service postgresql start
+[ ] Backend no ar:        cd backend/java_Spring && ./mvnw spring-boot:run
+    (esperar "Started PdsBackendApplication" / "Tomcat started on port 3000")
+[ ] Frontend no ar:       cd frontend && npm run dev  (http://localhost:5173)
+[ ] Jira aberto em uma aba (Backlog + Board do Sprint 2)
+[ ] Abrir DevTools do navegador (F12) na aba "Network" — prova a integração
+[ ] Fechar notificações/abas pessoais. Gravar em tela cheia.
+[ ] Ferramenta de gravação: Xbox Game Bar (Win+G) ou OBS.
+
+========================================================================
+BLOCO 0 — ABERTURA                                        (0:00 – 0:20)
+========================================================================
+[TELA] Rosto ou logo do Bellify / tela inicial do sistema.
+[FALA] "Olá, sou a <Shayene> do grupo <nome/integrantes>. Este é o vídeo
+       da entrega E2 do projeto Bellify, um sistema de gestão para salões
+       de beleza. Vou mostrar o backlog no Jira, o scrum board, as
+       histórias e tarefas do Sprint 2 e o sistema funcionando."
+
+========================================================================
+BLOCO 1 — BACKLOG NO JIRA                                 (0:20 – 1:10)
+========================================================================
+[TELA] Jira > Backlog (lista do Product Backlog).
+[FALA] "Este é o nosso backlog do produto no Jira. Aqui estão todas as
+       histórias de usuário priorizadas. No topo, as de maior prioridade;
+       mais abaixo, o que fica para as próximas sprints."
+[TELA] Role o backlog devagar. Passe o mouse por 2–3 itens principais.
+[FALA] "Temos épicos/histórias de <cadastro e autenticação>, <gestão do
+       salão — profissionais e serviços> e <agendamentos>. Cada item tem
+       estimativa em <story points> e responsável."
+DICA: mostre a separação visual entre o Sprint 2 e o "Backlog" abaixo dele.
+
+========================================================================
+BLOCO 2 — SCRUM BOARD                                     (1:10 – 1:55)
+========================================================================
+[TELA] Jira > Board (quadro do Sprint 2) com as colunas
+       A Fazer / Em andamento / Concluído (To Do / In Progress / Done).
+[FALA] "Este é o nosso scrum board do Sprint 2. Trabalhamos com três
+       colunas: A Fazer, Em Andamento e Concluído. Conforme cada tarefa
+       avança, movemos o cartão pela esteira."
+[TELA] Aponte a coluna "Concluído" cheia; se houver algo em andamento, cite.
+[FALA] "Como dá pra ver, a maior parte das tarefas do sprint está em
+       Concluído — foi o que desenvolvemos nesta entrega."
+
+========================================================================
+BLOCO 3 — HISTÓRIAS E TAREFAS DO SPRINT 2                 (1:55 – 2:55)
+========================================================================
+[TELA] Abra o Sprint 2. Clique numa história para expandir as subtarefas.
+[FALA] "Detalhando o Sprint 2. Tivemos as seguintes histórias:"
+
+  (ajuste os títulos/pontos conforme o SEU Jira — exemplos do que foi feito:)
+
+  • HISTÓRIA 1 — "Como visitante, quero me cadastrar como cliente, admin
+    ou profissional para acessar a plataforma."
+      Tarefas: tela de cadastro adaptável por perfil; validações do
+      formulário; endpoint POST /api/auth/cadastro; persistência no
+      PostgreSQL; hash de senha com bcrypt.
+
+  • HISTÓRIA 2 — "Como usuário, quero fazer login para acessar minha conta."
+      Tarefas: tela de login; endpoint POST /api/auth/login; geração de
+      token de sessão; tratamento de mensagens de erro.
+
+  • HISTÓRIA 3 — "Como administrador, quero gerenciar meu salão."
+      Tarefas: painel/dashboard admin; tela de profissionais e cadastro
+      de profissional; tela de serviços e cadastro de serviço.
+
+  • TAREFAS TÉCNICAS — integração front-end (React/Vite) com back-end
+    (Java Spring); configuração de CORS; padronização das rotas em /api.
+
+[FALA] "Cada história foi quebrada em tarefas, atribuída a um responsável
+       e movida até Concluído conforme foi entregue."
+
+========================================================================
+BLOCO 4 — SISTEMA FUNCIONANDO                             (2:55 – 4:45)
+========================================================================
+Objetivo: provar que as funcionalidades do Sprint 2 funcionam de verdade,
+incluindo a integração com o backend e o banco.
+
+--- 4.1 Cadastro (0:40) ---
+[TELA] Navegador em http://localhost:5173/cadastro. Abra o DevTools > Network.
+[FALA] "Começando pelo cadastro. Vou criar uma conta de administrador de
+       salão."
+[TELA] Clique em "Não sou cliente" > "Administrador". Preencha:
+       Salão: <Studio Glamour> | Endereço: <Rua X, 123>
+       E-mail: <demo@studio.com> | Telefone: <(11) 91234-5678>
+       Senha e confirmação: <123456>. Clique em "Criar conta".
+[FALA] "Ao enviar, o front chama o backend. Repare no Network: a chamada
+       POST /api/auth/cadastro retornou 201 Created — a conta foi criada."
+[TELA] Mostre a tela verde "Cadastro realizado!" e o 201 no Network.
+
+--- 4.2 Prova de persistência no banco (0:25) — OPCIONAL, mas impressiona ---
+[TELA] Terminal WSL, rode:
+       PGPASSWORD=postgres psql -h localhost -U postgres -d pds_backend \
+         -c "SELECT id, nome, email, perfil FROM usuarios;"
+[FALA] "E aqui está a prova de que persistiu: consultando o PostgreSQL, o
+       usuário que acabei de cadastrar está gravado na tabela usuarios."
+
+--- 4.3 Login (0:30) ---
+[TELA] Vá para http://localhost:5173/login. Entre com <demo@studio.com> / <123456>.
+[FALA] "Agora o login com essas credenciais."
+[TELA] No Network, abra a resposta de POST /api/auth/login.
+[FALA] "O backend autenticou e devolveu um token de sessão e os dados do
+       usuário — é o que usaríamos para manter a sessão logada."
+[TELA] (Mostre o JSON com token e usuario.)
+
+--- 4.4 Tratamento de erro (0:15) ---
+[FALA] "E se a senha estiver errada?"
+[TELA] Tente logar com senha errada.
+[FALA] "O sistema mostra a mensagem real vinda do backend: 'Email ou senha
+       inválidos' — com o tratamento de erros que implementamos."
+
+--- 4.5 Telas do admin (0:20) ---
+[TELA] Navegue por /admin (dashboard), /admin/profissionais e /admin/servicos.
+[FALA] "Por fim, a área administrativa: o painel do salão, a tela de
+       profissionais e a de serviços, com os fluxos de cadastro que
+       fazem parte da gestão do salão."
+
+========================================================================
+BLOCO 5 — ENCERRAMENTO                                    (4:45 – 5:00)
+========================================================================
+[TELA] Volte ao board do Jira (colunas com Concluído cheio).
+[FALA] "Resumindo: entregamos o cadastro com perfis, o login autenticado
+       integrados ao backend Java e ao banco PostgreSQL, além das telas de
+       gestão do salão — tudo planejado e acompanhado no Jira."
+[TELA] Aponte, na coluna "Em andamento", as tarefas de backend de serviços
+       e profissionais.
+[FALA] "Não deu tempo de concluir a sprint por completo: a persistência de
+       serviços e profissionais no backend ficou em andamento e será
+       finalizada na próxima sprint, como mostram estes cartões. Obrigada!"
+
+
+========================================================================
+ENTREGA
+========================================================================
+1. Grave a tela (Win+G ou OBS), confira que ficou < 5 min.
+2. Suba o vídeo (YouTube "não listado" ou OneDrive) e copie o link.
+3. Cole o LINK no Teams, conforme as instruções da atividade.
+4. Prazo: amanhã, 23:59.
+
+DICAS FINAIS
+- Fale com calma; se travar, corte e regrave só o trecho.
+- Deixe backend + frontend já rodando ANTES de apertar REC (evita tela de erro).
+- Se o tempo apertar, o Bloco 4.2 (banco) é o primeiro a cortar.
+========================================================================

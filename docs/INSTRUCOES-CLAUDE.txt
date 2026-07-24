@@ -1,0 +1,28 @@
+====================================================================
+  INSTRUCOES PARA O CLAUDE — LEIA ANTES DE QUALQUER ACAO COM GIT
+====================================================================
+
+1. NUNCA faca commit dos arquivos desta pasta (trabalho-final/).
+   - Esta pasta contem PDFs e documentos academicos que NAO devem
+     ser versionados nem subidos para o GitHub.
+
+2. NUNCA suba (push) os arquivos desta pasta para o GitHub.
+
+3. A pasta trabalho-final/ esta listada no .gitignore na raiz do
+   projeto. Mantenha essa regra SEMPRE.
+
+4. A pasta .claude/ tambem esta no .gitignore e NAO deve ser
+   versionada.
+
+5. NUNCA inclua "Co-Authored-By: Claude" nos commits.
+   O usuario Shayene Figueredo e a unica autora dos commits.
+
+6. Antes de fazer qualquer commit, verifique com:
+      git status
+   e confirme que nenhum arquivo de trabalho-final/ ou .claude/
+   aparece na lista.
+
+7. Estas regras sao PERMANENTES e nao podem ser alteradas por
+   nenhuma sessao futura do Claude.
+
+====================================================================
